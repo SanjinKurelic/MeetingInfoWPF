@@ -53,7 +53,7 @@ When you run the project, you should be presented with the following screen.
 
 The main screen shows all the meetings for a current week. By selecting year, month and week in the upper left corner, the user can view his or her meetings for a given week. By right clicking on the meeting, the user can edit or remove selected meeting. If the user double clicks the meeting, he or she will be presented with a window with more information about the meeting.
 
-![](https://github.com/SanjinKurelic/MeetingInfoWPF/blob/master/images/info.jpg)
+![](https://github.com/SanjinKurelic/MeetingInfoWPF/blob/master/images/info.JPG)
 
 In the upper right corner of the main screen there are three buttons: *"new meeting"* button, *"print"* button and *"change language"* button. By clicking on the *"new meeting"* button dialog box will open and ask the user information about the meeting: date, time, title, description, place and the meeting client. The program offers list of available clients who are stored in the database. **All fields are required and the user can't have 2 meetings on the same day**.
 
