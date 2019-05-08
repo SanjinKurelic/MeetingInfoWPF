@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MeetingInfoDatabase;
 using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MeetingInfoWPF
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+
+        public static Repository Repository { get; private set; }
+        private static readonly string cs = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
+        public App()
+        {
+            Repository = new Repository(cs, MeetingInfoDatabase.DAO.DatabaseType.SqlHelper);
+        }
+
     }
 }

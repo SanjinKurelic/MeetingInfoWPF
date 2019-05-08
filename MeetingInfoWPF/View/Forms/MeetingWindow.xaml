@@ -1,0 +1,137 @@
+﻿<Window x:Class="MeetingInfoWPF.View.Forms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:p="clr-namespace:MeetingInfoWPF.Properties"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:components="clr-namespace:MeetingInfoWPF.View.Components"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="{x:Static p:Resources.WindowTitle}" Height="700" Width="1000">
+    <Window.Resources>
+        <Style x:Key="LabelMenu" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource BackgroundColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="UpDownButton" TargetType="Button">
+            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <Style x:Key="YearTextBox" TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Text" Value="0"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <Style x:Key="HeadButtons" TargetType="Button">
+            <Setter Property="Margin" Value="5,0,5,15"/>
+            <Setter Property="Padding" Value="20,0" />
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="HeadButtonsImage" TargetType="Button" BasedOn="{StaticResource HeadButtons}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                                BorderThickness="0" 
+                                BorderBrush="Black" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#F0F0F0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Background="#009688">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.Year}" Style="{StaticResource LabelMenu}" />
+
+            <StackPanel Margin="5,0" Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                <Button Content="&#xE09C;" Style="{StaticResource UpDownButton}" Click="Button_Year_Up_Click" />
+                <TextBox x:Name="txtNum" Style="{StaticResource YearTextBox}" Text="{Binding Path=DateYear}"/>
+                <Button Content="&#xE09D;" Style="{StaticResource UpDownButton}" Click="Button_Year_Down_Click"/>
+            </StackPanel>
+
+            <Label Grid.Column="0" Grid.Row="2" Content="{x:Static p:Resources.Month}" Style="{StaticResource LabelMenu}"/>
+
+            <ComboBox x:Name="currentMonth" Margin="5,0,5,35" Grid.Column="0" Grid.Row="3" SelectedIndex="{Binding Path=DateMonth}" SelectionChanged="Month_SelectionChanged">
+                <ComboBoxItem Content="{x:Static p:Resources.ChooseMonth}" IsEnabled="False" />
+                <ComboBoxItem Content="1" />
+                <ComboBoxItem Content="2" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="4" />
+                <ComboBoxItem Content="5" />
+                <ComboBoxItem Content="6" />
+                <ComboBoxItem Content="7" />
+                <ComboBoxItem Content="8" />
+                <ComboBoxItem Content="9" />
+                <ComboBoxItem Content="10" />
+                <ComboBoxItem Content="11" />
+                <ComboBoxItem Content="12" />
+            </ComboBox>
+
+            <Label Grid.Column="1" Grid.Row="0" Content="{x:Static p:Resources.Week}" Style="{StaticResource LabelMenu}" Margin="20,0"/>
+
+            <components:CustomCalendar SelectedDate="{Binding Path=CurrentDate, Mode=TwoWay}" Margin="20,5"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"></components:CustomCalendar>
+
+            <!-- Right side -->
+            <Button Grid.Column="4" Grid.Row="4" Click="Add_Meeting_Click" Style="{StaticResource HeadButtons}" Content="{x:Static p:Resources.NewMeetingButton}" />
+            <Button Grid.Column="5" Grid.Row="4" Click="Print_Click" Style="{StaticResource HeadButtonsImage}">
+                <Button.Content>
+                    <Image Source="/View/Resources/printIcon.png" Width="40" Height="40"/>
+                </Button.Content>
+            </Button>
+            <Button Grid.Column="6" Grid.Row="4" Click="Language_Click" Style="{StaticResource HeadButtonsImage}">
+                <Button.Content>
+                    <Image Source="/View/Resources/languageIcon.png" Width="40" Height="40"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <DockPanel Grid.Row="1" MinHeight="530">
+            <components:WeekPlaner x:Name="weekPlaner" CurrentDate="{Binding Path=CurrentDate, Mode=OneWay}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </DockPanel>
+    </Grid>
+</Window>

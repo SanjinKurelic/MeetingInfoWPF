@@ -2,8 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MeetingInfoWPF"
-             StartupUri="MainWindow.xaml">
+             StartupUri="View/Forms/MeetingWindow.xaml">
     <Application.Resources>
-         
+        <Color x:Key="BackgroundColor">#F0F0F0</Color>
+        <Color x:Key="ShadowColor">#DEDEDE</Color>
+        <Color x:Key="SelectedColor">#009688</Color>
+        <Color x:Key="TextColor">Black</Color>
+        <FontFamily x:Key="Roboto">pack://application:,,,/View/Resources/#Roboto</FontFamily>
+        <FontFamily x:Key="SegoePrint">pack://application:,,,/View/Resources/#Segoe Print</FontFamily>
     </Application.Resources>
 </Application>

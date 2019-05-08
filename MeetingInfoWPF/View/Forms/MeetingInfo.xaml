@@ -1,0 +1,185 @@
+﻿<Window x:Class="MeetingInfoWPF.View.Forms.MeetingInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:MeetingInfoWPF.Properties"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="{x:Static p:Resources.MeetingInfoTitle}" Height="480" Width="360">
+    <Window.Background>
+        <SolidColorBrush Color="{StaticResource BackgroundColor}" />
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Name="Labels" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+        </Style>
+        <Style x:Key="Title" TargetType="Label">
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource SelectedColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource BackgroundColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,2"/>
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource BackgroundColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,2"/>
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+        </Style>
+        <Style x:Name="DatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Margin" Value="5,2"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource SelectedColor}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource BackgroundColor}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource ShadowColor}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+        
+        <!-- Meeting info -->
+        <Label Style="{StaticResource Title}" Content="{x:Static p:Resources.MeetingInfoSubtitle}" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="1" Grid.Column="0" Content="{x:Static p:Resources.Date}" />
+        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding Meeting.Date}" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="{x:Static p:Resources.Time}" />
+        <ComboBox 
+            Style="{StaticResource ComboBoxStyle}" 
+            Grid.Row="2" 
+            Grid.Column="1" 
+            SelectedValuePath="Content" 
+            SelectedValue="{Binding Meeting.Date.Hour, Mode=OneWay}" 
+            SelectionChanged="hour_SelectionChanged"
+            >
+            <ComboBoxItem Content="8" />
+            <ComboBoxItem Content="9" />
+            <ComboBoxItem Content="10" />
+            <ComboBoxItem Content="11" />
+            <ComboBoxItem Content="12" />
+            <ComboBoxItem Content="13" />
+            <ComboBoxItem Content="14" />
+            <ComboBoxItem Content="15" />
+            <ComboBoxItem Content="16" />
+            <ComboBoxItem Content="17" />
+            <ComboBoxItem Content="18" />
+            <ComboBoxItem Content="19" />
+            <ComboBoxItem Content="20" />
+        </ComboBox>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="{x:Static p:Resources.Title}" />
+        <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="3" Grid.Column="1" x:Name="MeetingTitle" Text="{Binding Meeting.Title}" />
+
+        <Label Grid.Row="4" Grid.Column="0" Content="{x:Static p:Resources.Description}" />
+        <TextBox Style="{StaticResource TextBoxStyle}" AcceptsReturn="True"  TextWrapping="Wrap" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" x:Name="MeetingDescription" Text="{Binding Meeting.Description}" />
+
+        <Label Grid.Row="6" Grid.Column="0" Content="{x:Static p:Resources.Place}" />
+        <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" x:Name="MeetingPlace" Text="{Binding Meeting.Place}" />
+
+        <!-- Client Info -->
+        <Label Style="{StaticResource Title}" Grid.Row="7" Grid.ColumnSpan="2" Content="{x:Static p:Resources.ClientInfoSubtitle}" />
+
+        <Label Grid.Row="8" Grid.Column="0" Content="Client:" />
+        <ComboBox Style="{StaticResource ComboBoxStyle}" 
+                  Grid.Row="8" 
+                  Grid.Column="1" 
+                  SelectionChanged="clients_SelectionChanged"
+                  x:Name="clients" />
+
+        <Label Grid.Row="9" Grid.Column="0" Content="{x:Static p:Resources.Name}" />
+        <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Row="9" Grid.Column="1" Text="{Binding Client.Name}" />
+
+        <Label Grid.Row="10" Grid.Column="0" Content="{x:Static p:Resources.Surname}" />
+        <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Row="10" Grid.Column="1" Text="{Binding Client.Surname}" />
+
+        <Label Grid.Row="11" Grid.Column="0" Content="{x:Static p:Resources.Email}" />
+        <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Row="11" Grid.Column="1" Text="{Binding Client.Email}" />
+
+        <Label Grid.Row="12" Grid.Column="0" Content="{x:Static p:Resources.Phone}" />
+        <TextBlock Style="{StaticResource TextBlockStyle}" Grid.Row="12" Grid.Column="1" Text="{Binding Client.Phone}" />
+
+        <Grid Grid.Column="1" Grid.Row="13">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnCancel" Click="Cancel_Button_Click" Style="{StaticResource ButtonStyle}" Content="{x:Static p:Resources.CancelButton}" />
+            <Button x:Name="btnClose" Grid.ColumnSpan="2" Click="Cancel_Button_Click" Style="{StaticResource ButtonStyle}" Content="{x:Static p:Resources.CloseButton}" />
+            <Button x:Name="btnSave" Click="Save_Button_Click" Style="{StaticResource ButtonStyle}" Grid.Column="1" Content="{x:Static p:Resources.SaveButton}" />
+        </Grid>
+
+    </Grid>
+</Window>

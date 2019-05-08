@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="MeetingInfoWPF.View.Components.WeekPlaner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:MeetingInfoWPF.Properties"
+             mc:Ignorable="d"
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="530" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="MenuLabel" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource SegoePrint}"/>
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <ContextMenu x:Key="MeetingItemContextMenu">
+            <MenuItem Header="{x:Static p:Resources.EditContextMenu}" Click="EditMenuItem_Click" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" />
+            <MenuItem Header="{x:Static p:Resources.RemoveContextMenu}" Click="RemoveMenuItem_Click" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+        </ContextMenu>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Days -->
+        <Label Style="{StaticResource MenuLabel}" Content="{x:Static p:Resources.Hour}" Grid.Column="0" Grid.Row="0" />
+        <Label Style="{StaticResource MenuLabel}" Content="{x:Static p:Resources.Monday}" Grid.Column="1" Grid.Row="0" />
+        <Label Style="{StaticResource MenuLabel}" Content="{x:Static p:Resources.Tuesday}" Grid.Column="2" Grid.Row="0" />
+        <Label Style="{StaticResource MenuLabel}" Content="{x:Static p:Resources.Wednesday}" Grid.Column="3" Grid.Row="0" />
+        <Label Style="{StaticResource MenuLabel}" Content="{x:Static p:Resources.Thursday}" Grid.Column="4" Grid.Row="0" />
+        <Label Style="{StaticResource MenuLabel}" Content="{x:Static p:Resources.Friday}" Grid.Column="5" Grid.Row="0" />
+
+        <!-- Hours -->
+        <Label Style="{StaticResource MenuLabel}" Content="8:00" Grid.Column="0" Grid.Row="1" />
+        <Label Style="{StaticResource MenuLabel}" Content="9:00" Grid.Column="0" Grid.Row="2" />
+        <Label Style="{StaticResource MenuLabel}" Content="10:00" Grid.Column="0" Grid.Row="3" />
+        <Label Style="{StaticResource MenuLabel}" Content="11:00" Grid.Column="0" Grid.Row="4" />
+        <Label Style="{StaticResource MenuLabel}" Content="12:00" Grid.Column="0" Grid.Row="5" />
+        <Label Style="{StaticResource MenuLabel}" Content="13:00" Grid.Column="0" Grid.Row="6" />
+        <Label Style="{StaticResource MenuLabel}" Content="14:00" Grid.Column="0" Grid.Row="7" />
+        <Label Style="{StaticResource MenuLabel}" Content="15:00" Grid.Column="0" Grid.Row="8" />
+        <Label Style="{StaticResource MenuLabel}" Content="16:00" Grid.Column="0" Grid.Row="9" />
+        <Label Style="{StaticResource MenuLabel}" Content="17:00" Grid.Column="0" Grid.Row="10" />
+        <Label Style="{StaticResource MenuLabel}" Content="18:00" Grid.Column="0" Grid.Row="11" />
+        <Label Style="{StaticResource MenuLabel}" Content="19:00" Grid.Column="0" Grid.Row="12" />
+        <Label Style="{StaticResource MenuLabel}" Content="20:00" Grid.Column="0" Grid.Row="13" />
+
+        <ItemsControl AlternationCount="12" x:Name="weekList" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="13">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                    </Grid>                    
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Column" Value="{Binding ColumnIndex}" />
+                    <Setter Property="Grid.Row" Value="{Binding RowIndex}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel x:Name="ContentItem" ContextMenu="{StaticResource MeetingItemContextMenu}" Tag="{Binding Path=MeetingId}" MouseLeftButtonUp="ContentItem_MouseLeftButtonUp">
+                        <Label Content="{Binding Title}" FontFamily="{StaticResource Roboto}" Margin="5,5,5,0" Padding="0" FontWeight="Bold" FontSize="12" />
+                        <Label Grid.Row="1" Content="{Binding Description}" Margin="5,0,5,5" Padding="0" FontFamily="{StaticResource Roboto}" FontSize="9" />
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="Grid.Column" Value="0">
+                            <Setter Property="Background" Value="#FF8800" TargetName="ContentItem" />
+                        </Trigger>
+                        <Trigger Property="Grid.Column" Value="1">
+                            <Setter Property="Background" Value="Tan" TargetName="ContentItem" />
+                        </Trigger>
+                        <Trigger Property="Grid.Column" Value="2">
+                            <Setter Property="Background" Value="#F6BB42" TargetName="ContentItem" />
+                        </Trigger>
+                        <Trigger Property="Grid.Column" Value="3">
+                            <Setter Property="Background" Value="#8CC152" TargetName="ContentItem" />
+                        </Trigger>
+                        <Trigger Property="Grid.Column" Value="4">
+                            <Setter Property="Background" Value="#967ADC" TargetName="ContentItem" />
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
