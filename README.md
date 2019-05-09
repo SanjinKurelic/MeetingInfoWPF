@@ -1,6 +1,6 @@
 # Meeting Info
 
-Meeting Info is the program for scheduling meetings. The main part of the program is a calendar with ability to add, update or remove meeting with a specific client. The program is written in C# using Windows Presentation Foundation (WPF) technology for Microsoft Windows operating system. This project is alos available in several other technologies:
+Meeting Info is the program for scheduling meetings. The main part of the program is a calendar with ability to add, update or remove meeting with a specific client. The program is written in C# using Windows Presentation Foundation (WPF) technology for Microsoft Windows operating system. This project is also available in several other technologies:
 
 - [Windows Forms](https://github.com/SanjinKurelic/MeetingInfoWinForms)
 - WPF (current one)
@@ -18,11 +18,11 @@ For running the project you need to have the following items:
 - .NET Framework 4.6.1 or newer
 - *MeetingInfoDatabase*
 
-Notice: Project might run on the older .NET Framework or using older Visual Studio/SQL Server version, with or without additional tweaks.
+**Notice:** Project might run on the older .NET Framework or using older Visual Studio/SQL Server version, with or without additional tweaks.
 
 ### Installig
 
-Install Visual Studio - include the .NET Framework and Windows Forms. Download the *MeetingInfoDatabase* NuGet package from *MeetingInfoDatabase* project (**NuGet package is located in "packed" folder**):
+Install Visual Studio - include the .NET Framework and Windows Presentation Foundation (WPF) library. Download the *MeetingInfoDatabase* NuGet package from *MeetingInfoDatabase* project (**NuGet package is located in "packed" folder**):
 
 https://github.com/SanjinKurelic/MeetingInfoDatabase
 
@@ -31,7 +31,7 @@ From the same repository, download file **Database.sql**. Install SQL Server and
 database username: **sa**<br>
 database password: **SQL**
 
-Note: It is discouraged to use **"sa"** account for application-database connection, so it is preferable to create the new user for this project. If you create different user, you need to change connection strings in the project configuration file:
+**Note:** It is discouraged to use **"sa"** account for application-database connection, so it is preferable to create the new user for this project. If you create different user, you need to change connection strings in the project configuration file:
 
 ```
 MeetingInfoWPF > MeetingInfoWPF > App.config
@@ -55,7 +55,7 @@ The main screen shows all the meetings for a current week. By selecting year, mo
 
 ![](https://github.com/SanjinKurelic/MeetingInfoWPF/blob/master/images/info.JPG)
 
-In the upper right corner of the main screen there are three buttons: *"new meeting"* button, *"print"* button and *"change language"* button. By clicking on the *"new meeting"* button dialog box will open and ask the user information about the meeting: date, time, title, description, place and the meeting client. The program offers list of available clients who are stored in the database. **All fields are required and the user can't have 2 meetings on the same day**.
+In the upper right corner of the main screen there are three buttons: *"new meeting"* button, *"print"* button and *"change language"* button. By clicking on the *"new meeting"* button, dialog box will open and ask the user information about the meeting: date, time, title, description, place and the meeting client. The program offers list of available clients who are stored in the database. **All fields are required and the user can't have 2 meetings on the same day**.
 
 ![](https://github.com/SanjinKurelic/MeetingInfoWPF/blob/master/images/new.jpg)
 
