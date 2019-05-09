@@ -45,6 +45,8 @@ Open Visual Studio and clone this repository to your computer. Open NuGet shell 
 Install-Package MeetingInfoDatabase -Source <path_to_package>
 ```
 
+**Before running the project install fonts located in "fonts" directory.**
+
 ### Running
 
 When you run the project, you should be presented with the following screen.
